@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+
+
+
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="semantic/semantic.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous">
+
+        </script>
+    <script src="semantic/semantic.js"></script>
+    <style>
+        .filebox {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .filebox label {
+            display: inline-block;
+            padding: .5em .75em;
+            color: rgb(255, 255, 255);
+            font-size: inherit;
+            line-height: normal;
+            vertical-align: middle;
+            background-color: #1d41a5;
+            cursor: pointer;
+            border: 1px solid #ebebeb;
+            border-bottom-color: #e2e2e2;
+            border-radius: .25em;
+        }
+
+        .filebox input[type="file"] {
+            /* 파일 필드 숨기기 */
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
+        .img_wrap {
+            width: 300px;
+            margin-top: 30px;
+
+        }
+
+        img {
+            max-width: 220px;
+        }
+
+        .img_wrap img {
+            max-width: 100%;
+        }
+
+        .feed {
+            display: inline;
+            margin-left: 15px;
+        }
+    </style>
+    <script>
+        var sel_file;
+        $(document).ready(function () {
+            $("#ex_file").on("change", handleImgFileSelect);
+
+        });
+
+        function handleImgFileSelect(e) {
+            var files = e.target.files;
+            var filesArr = Array.prototype.slice.call(files);
+
+            filesArr.forEach(function (f) {
+                if (!f.type.match("image.*")) {
+                    alert("확장자는 이미지 확장자만 가능합니다.");
+                    return;
+                }
+                sel_file = f;
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $("#img").attr("src", e.target.result);
+                }
+                reader.readAsDataURL(f);
+
+            });
+
+            $("#startButton").show();
+            $("#originalImgLabel").show();
+        }
+    </script>
+</head>
+
+<body>
+    <div class="ui sidebar inverted vertical menu">
+        <a class="item" id="firstPage">
+            1. 이미지 분석 프로세스
+        </a>
+        <a class="item" id="secondPage">
+            2. 연관피드 추천
+        </a>
+        <a class="item" id="thirdPage">
+            3. 개인화 서비스
+        </a>
+    </div>
+    <div class="pusher">
+        <div style='margin-left:20px; margin-top: 10px;'>
+            <button id=sideBarBtn class="ui button">
+                MENU
+            </button>
+            <div style='margin-top:20px'> </div>
+            <div style='margin-left:30px'>
+                <h2>
+                    연관 사진 추천
+                </h2>
+                <form id="uploadForm">
+
+                    <div class="filebox">
+                        <label for="ex_file">사진 업로드</label>
+                        <input type="file" id="ex_file">
+                    </div>
+                </form>
+                <div class="frame" style="margin-top: 20px; display: flex; ">
+                    <div class="original">
+                        <h3 id="originalImgLabel" style="display:none;"> 원본이미지 </h3>
+                        <div class="img_wrap">
+                            <img id="img" />
+                        </div>
+                        <button id="startButton" , class="ui button" style="display:none">
+                            연관피드 확인하기
+                        </button>
+                    </div>
+                    <div class="filterResult">
+                        <h3 id="originalImgLabel" style="display:none;"> 필터링한 연관사진 </h3>
+                        <div style="overflow: auto; width:600px; height:1200px">
+                            <!-- 여기다 연관 사진 리스트 이미지 태그 동적 생성해야함-->
+                            <div class="feed">
+                                <img id="croppedImg"
+                                    src="https://i.pinimg.com/originals/d2/3f/fb/d23ffbb054cd9358911fb171d6fcf636.jpg">
+                                <p>분류</p>
+                                <p>상의: </p>
+                                <p>하의: </p>
+                                <p>asd </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="noFilter">
+
+                        <h3 id="originalImgLabel" style="display:none;"> 전체 연관 사진 </h3>
+                        <div style="overflow: auto; width:600px; height:1200px">
+                            <!-- 여기다 전체 연관 사진 리스트 이미지 태그 동적 생성해야함-->
+
+                            <div class="img_crop">
+                                <img id="croppedImg">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        var totalFeedList = [];
+        var filteredFeedList = [];
+        $('#sideBarBtn').click(function () {
+            $('.ui.sidebar').sidebar('toggle');
+        })
+        $('#firstPage').click(function () {
+            location.href = 'index.html';
+        });
+        $('#secondPage').click(function () {
+            location.href = 'relative.html';
+        });
+        $('#thirdPage').click(function () {
+            location.href = 'personal.html';
+        });
+        $('#startButton').click(function () {
+            
+            // 서버에 사진을 보낸 다음 돌아오는 데이터로 핸들링해야함
+            // var form = $('#uploadForm')[0];
+            // var formData = new FormData(form);
+            // $.ajax({
+            //     type: 'POST',
+            //     enctype: 'multipart/form-data',
+            //     url: '',     //서버 url
+            //     data: formData,
+            //     contentType: false,
+            //     processData: false,
+            //     error: function(error){
+            //         alert("업로드 실패");
+            //     },
+            //     success: function(data) {
+            //         alert(data);
+            //     },
+            //     complete: function(){
+            //         alert("성공");
+            //     }                
+            // })
+        })
+    </script>
+</body>
+
+</html>

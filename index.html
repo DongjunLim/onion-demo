@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="semantic/semantic.css">
+    <style>
+        .filebox {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+
+        .filebox label {
+            display: inline-block;
+            padding: .5em .75em;
+            color: rgb(255, 255, 255);
+            font-size: inherit;
+            line-height: normal;
+            vertical-align: middle;
+            background-color: #1d41a5;
+            cursor: pointer;
+            border: 1px solid #ebebeb;
+            border-bottom-color: #e2e2e2;
+            border-radius: .25em;
+        }
+
+        .filebox input[type="file"] {
+            /* 파일 필드 숨기기 */
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
+        .img_wrap {
+            width: 300px;
+            margin-top: 30px;
+
+        }
+
+        img {
+            max-width: 300px;
+        }
+
+
+
+        .img_wrap img {
+            max-width: 100%;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous">
+
+        </script>
+    <script src="semantic/semantic.js"></script>
+
+    <script>
+        var sel_file;
+        $(document).ready(function () {
+            $("#ex_file").on("change", handleImgFileSelect);
+
+        });
+
+        function handleImgFileSelect(e) {
+            var files = e.target.files;
+            var filesArr = Array.prototype.slice.call(files);
+
+            filesArr.forEach(function (f) {
+                if (!f.type.match("image.*")) {
+                    alert("확장자는 이미지 확장자만 가능합니다.");
+                    return;
+                }
+                sel_file = f;
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $("#img").attr("src", e.target.result);
+                }
+                reader.readAsDataURL(f);
+
+            });
+
+            $("#startClassifier").show();
+            $("#originalImgLabel").show();
+        }
+    </script>
+</head>
+
+<body>
+
+    <div class="ui sidebar inverted vertical menu">
+        <a class="item" id="firstPage">
+            1. 이미지 분석 프로세스
+        </a>
+        <a class="item" id="secondPage">
+            2. 연관피드 추천
+        </a>
+        <a class="item" id="thirdPage">
+            3. 개인화 서비스
+        </a>
+    </div>
+    <div class="pusher">
+        <div style='margin-left:20px; margin-top: 10px;'>
+            <button id=sideBarBtn class="ui button">
+                MENU
+            </button>
+            <div style='margin-top:20px'> </div>
+            <div style='margin-left:30px'>
+                <h2>
+                    이미지 분석 프로세스
+                </h2>
+                <form id="uploadForm">
+
+                    <div class="filebox">
+                        <label for="ex_file">사진 업로드</label>
+                        <input type="file" id="ex_file">
+                    </div>
+                </form>
+
+                <div class="frame" style="margin-top: 20px; display: flex; ">
+                    <div class="original">
+                        <h3 id="originalImgLabel" style="display:none;"> 원본이미지 </h3>
+                        <div class="img_wrap">
+                            <img id="img" />
+                        </div>
+                        <button id="startClassifier" , class="ui button" style="display:none">
+                            이미지 분석 시작
+                        </button>
+                    </div>
+                    <div class="crop" style="width:400px; height: 600px; margin-left:70px">
+                        <h3 style=""> 인물크롭 </h3>
+                        <div id='cropLoading' class="ui active centered inline loader" style="display: none;"></div>
+                        <div class="img_crop">
+                            <img id="croppedImg">
+                        </div>
+                        <button id="startClassifier" , class="ui button" style="display:none">
+                            배경제거 시작
+                        </button>
+
+                    </div>
+                    <div class="cleaning" style="width:400px; height: 600px;margin-left:70px">
+                        <h3 style=""> 배경제거 </h3>
+                        <div class="ui active centered inline loader" style="display: none;"></div>
+                        <div class="img_cleaning">
+                            <img id="cleaningImg">
+                        </div>
+
+                    </div>
+                    <div class="result" style="width:400px; height: 600px; margin-left:70px">
+                        <h3> 분류 결과 </h3>
+                        <div class="ui active centered inline loader" style="display: none;"></div>
+                        <div class="img_result">
+                            <img id="resultImg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        $('.ui.dropdown').dropdown();
+        $('#sideBarBtn').click(function () {
+            $('.ui.sidebar').sidebar('toggle');
+
+        })
+        $('#firstPage').click(function () {
+            location.href = 'index.html';
+        });
+        $('#secondPage').click(function () {
+            location.href = 'relative.html';
+        });
+        $('#thirdPage').click(function () {
+            location.href = 'personal.html';
+        });
+
+        $('#startClassifier').click(function () {
+            $('#cropLoading').show()
+            // var form = $('#uploadForm')[0];
+            // var formData = new FormData(form);
+            // $.ajax({
+            //     type: 'POST',
+            //     enctype: 'multipart/form-data',
+            //     url: '',     //서버 url
+            //     data: formData,
+            //     contentType: false,
+            //     processData: false,
+            //     error: function(error){
+            //         alert("업로드 실패");
+            //     },
+            //     success: function(data) {
+            //         alert(data);
+            //     },
+            //     complete: function(){
+            //         alert("성공");
+            //     }                
+            // })
+            $('#croppedImg').attr("src", "https://mblogthumb-phinf.pstatic.net/MjAyMDAzMThfMjAg/MDAxNTg0NTM5MTM3Nzg0.-n1nh0qvBE-9WK8y_Yp0hBHufqZUHJllMENS2YI4HMAg.GLhV8qcfd8UcTXZ6Bx-55FDDm3yitUSpxIaCWU6qP-Ig.JPEG.sh1890/%25ED%2595%2598%25ED%258A%25B8%25EC%258B%259C%25EA%25B7%25B8%25EB%2584%2590_%25EC%258B%259C%25EC%25A6%258C3_%25EB%25B2%2584%25EB%258B%259D%25EC%258D%25AC_%25EA%25B9%2580%25EA%25B0%2595%25EC%2597%25B4_%25EC%259D%25B4%25EA%25B0%2580%25ED%259D%2594_%25ED%2595%2599%25ED%258F%25AD_(9).jpg?type=w800")
+            $('#cleaningImg').attr("src", "https://mblogthumb-phinf.pstatic.net/MjAyMDAzMThfMjAg/MDAxNTg0NTM5MTM3Nzg0.-n1nh0qvBE-9WK8y_Yp0hBHufqZUHJllMENS2YI4HMAg.GLhV8qcfd8UcTXZ6Bx-55FDDm3yitUSpxIaCWU6qP-Ig.JPEG.sh1890/%25ED%2595%2598%25ED%258A%25B8%25EC%258B%259C%25EA%25B7%25B8%25EB%2584%2590_%25EC%258B%259C%25EC%25A6%258C3_%25EB%25B2%2584%25EB%258B%259D%25EC%258D%25AC_%25EA%25B9%2580%25EA%25B0%2595%25EC%2597%25B4_%25EC%259D%25B4%25EA%25B0%2580%25ED%259D%2594_%25ED%2595%2599%25ED%258F%25AD_(9).jpg?type=w800")
+            $('#resultImg').attr("src", "https://mblogthumb-phinf.pstatic.net/MjAyMDAzMThfMjAg/MDAxNTg0NTM5MTM3Nzg0.-n1nh0qvBE-9WK8y_Yp0hBHufqZUHJllMENS2YI4HMAg.GLhV8qcfd8UcTXZ6Bx-55FDDm3yitUSpxIaCWU6qP-Ig.JPEG.sh1890/%25ED%2595%2598%25ED%258A%25B8%25EC%258B%259C%25EA%25B7%25B8%25EB%2584%2590_%25EC%258B%259C%25EC%25A6%258C3_%25EB%25B2%2584%25EB%258B%259D%25EC%258D%25AC_%25EA%25B9%2580%25EA%25B0%2595%25EC%2597%25B4_%25EC%259D%25B4%25EA%25B0%2580%25ED%259D%2594_%25ED%2595%2599%25ED%258F%25AD_(9).jpg?type=w800")
+
+        })
+
+    </script>
+    <script>
+
+    </script>
+</body>
+
+</html>

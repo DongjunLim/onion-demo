@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+
+
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="semantic/semantic.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous">
+
+        </script>
+    <script src="semantic/semantic.js"></script>
+</head>
+
+<body>
+    <div class="ui sidebar inverted vertical menu">
+        <a class="item" id="firstPage">
+            1. 이미지 분석 프로세스
+        </a>
+        <a class="item" id="secondPage">
+            2. 연관피드 추천
+        </a>
+        <a class="item" id="thirdPage">
+            3. 개인화 서비스
+        </a>
+    </div>
+    <div class="pusher" >
+        <div style='margin-left:20px; margin-top: 10px;'>
+        <button id=sideBarBtn class="ui button">
+            MENU
+        </button>
+        <div style='margin-top:20px'> </div>
+        <div style='margin-left:30px'>
+            <h2>
+                개인화 서비스
+            </h2>
+        </div>
+    </div>
+    </div>
+
+    <script>
+        $('#sideBarBtn').click(function () {
+            $('.ui.sidebar').sidebar('toggle');
+
+        })
+        $('#firstPage').click(function () {
+            location.href = 'index.html';
+        });
+        $('#secondPage').click(function () {
+            location.href = 'relative.html';
+        });
+        $('#thirdPage').click(function () {
+            location.href = 'personal.html';
+        });
+    </script>
+
+</body>
+
+</html>
