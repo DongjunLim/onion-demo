@@ -9,6 +9,23 @@
             margin-right: 10px;
         }
 
+        .accuracy {
+            padding: 8px;
+            text-align: end;
+            font-size: 16px;
+        }
+        .colorAcc {
+            padding: 8px;
+            text-align:  end;
+            font-size: 16px;
+        }
+        .clr {
+            width:50px;
+        }
+
+        .categoryName{
+            padding: 8px;
+        }
 
         .filebox label {
             display: inline-block;
@@ -86,6 +103,8 @@
             $("#startClassifier").show();
             $("#originalImgLabel").show();
         }
+
+
     </script>
 </head>
 
@@ -115,8 +134,8 @@
                 <form id="uploadForm">
 
                     <div class="filebox">
-                        <label for="ex_file">사진 업로드</label>
                         <input type="file" id="ex_file">
+                        <label for="ex_file">사진 업로드</label>
                     </div>
                 </form>
 
@@ -152,8 +171,111 @@
                     <div class="result" style="width:400px; height: 600px; margin-left:70px">
                         <h3> 분류 결과 </h3>
                         <div class="ui active centered inline loader" style="display: none;"></div>
-                        <div class="img_result">
-                            <img id="resultImg">
+                        <div style="display: flex;">
+                            <table border='1' style="font-size: 20px;">
+                                <tr>
+                                    <th style="padding: 10px; background-color: lightgrey;" colspan="2">
+                                        색상
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td class = 'clr' style="background-color: red;"></td>
+                                    <td id="redAcc" class="colorAcc">12%</td>
+                                </tr>
+                                <tr>
+                                    <td class = 'clr' style="background-color: orange;"></td>
+                                    <td id="orangeAcc" class="colorAcc">12%</td>
+                                </tr>
+                                <tr>
+                                    <td class = 'clr' style="background-color: yellow;"></td>
+                                    <td id="yellowAcc" class="colorAcc">12%</td>
+
+                                </tr>
+                                <tr>
+                                    <td class = 'clr' style="background-color: green;"></td>
+                                    <td id="greenAcc" class="colorAcc">12%</td>
+
+                                </tr>
+                                <tr>
+                                    <td class = 'clr' style="background-color: blue;"></td>
+                                    <td id="blueAcc" class="colorAcc">12%</td>
+
+                                </tr>
+                                <tr>
+                                    <td class = 'clr' style="background-color: navy;"></td>
+                                    <td id="navyAcc" class="colorAcc">12%</td>
+
+                                </tr>
+                                <tr>
+                                    <td class = 'clr' style="background-color: purple;"></td>
+                                    <td id="purpleAcc" class="colorAcc">12%</td>
+                                </tr>
+                            </table>
+                            <div style="width:50px;"> </div>
+                            <table border='1' style="font-size: 24px;">
+                                <tr>
+                                    <th style = "padding: 8px; background-color: lightgrey;">카테고리</th>
+                                    <th style = "padding: 8px; background-color: lightgrey;">유사도</th>
+                                </tr>
+                                <tr>
+                                    <td class="categoryName">캐주얼자켓</td>
+                                    <td id="casualJacketAcc" class="accuracy">12%</td>
+                                </tr>
+                                <tr>
+                                    <td class="categoryName">데님자켓</td>
+                                    <td id="denimJacketAcc" class="accuracy">12%</td>
+                                </tr>
+                                <tr>
+                                    <td class="categoryName">반팔티</td>
+                                    <td id="shortSleeveAcc" class="accuracy">12%</td>
+
+                                </tr>
+                                <tr>
+                                    <td class="categoryName">긴팔티</td>
+                                    <td id="longSleeveAcc" class="accuracy">12%</td>
+
+                                </tr>
+                                <tr>
+                                    <td class="categoryName">맨투맨</td>
+                                    <td id="sweatshirtAcc" class="accuracy">12%</td>
+
+                                </tr>
+                                <tr>
+                                    <td class="categoryName">니트</td>
+                                    <td id="knitAcc" class="accuracy">12%</td>
+
+                                </tr>
+                                <tr>
+                                    <td class="categoryName">코트</td>
+                                    <td id="coatAcc" class="accuracy">12%</td>
+
+                                </tr>
+                                <tr>
+                                    <td class="categoryName">패딩</td>
+                                    <td id="paddingAcc" class="accuracy">12%</td>
+
+                                </tr>
+                                <tr>
+                                    <td class="categoryName">라이더자켓</td>
+                                    <td id="riderjacketAcc" class="accuracy">12%</td>
+
+                                </tr>
+                                <tr>
+                                    <td class="categoryName">트렌치코트</td>
+                                    <td id="trenchCoatAcc" class="accuracy">12%</td>
+
+                                </tr>
+                                <tr>
+                                    <td class="categoryName">민소매티셔츠</td>
+                                    <td id="sleevelessAcc" class="accuracy">12%</td>
+
+                                </tr>
+                                <tr>
+                                    <td class="categoryName">셔츠</td>
+                                    <td id="shirtAcc" class="accuracy">12%</td>
+
+                                </tr>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -177,31 +299,38 @@
         $('#thirdPage').click(function () {
             location.href = 'personal.html';
         });
-
+        function sleep(t) {
+            return new Promise(resolve => setTimeout(resolve, t));
+        }
         $('#startClassifier').click(function () {
             $('#cropLoading').show()
-            // var form = $('#uploadForm')[0];
-            // var formData = new FormData(form);
-            // $.ajax({
-            //     type: 'POST',
-            //     enctype: 'multipart/form-data',
-            //     url: '',     //서버 url
-            //     data: formData,
-            //     contentType: false,
-            //     processData: false,
-            //     error: function(error){
-            //         alert("업로드 실패");
-            //     },
-            //     success: function(data) {
-            //         alert(data);
-            //     },
-            //     complete: function(){
-            //         alert("성공");
-            //     }                
-            // })
-            $('#croppedImg').attr("src", "https://mblogthumb-phinf.pstatic.net/MjAyMDAzMThfMjAg/MDAxNTg0NTM5MTM3Nzg0.-n1nh0qvBE-9WK8y_Yp0hBHufqZUHJllMENS2YI4HMAg.GLhV8qcfd8UcTXZ6Bx-55FDDm3yitUSpxIaCWU6qP-Ig.JPEG.sh1890/%25ED%2595%2598%25ED%258A%25B8%25EC%258B%259C%25EA%25B7%25B8%25EB%2584%2590_%25EC%258B%259C%25EC%25A6%258C3_%25EB%25B2%2584%25EB%258B%259D%25EC%258D%25AC_%25EA%25B9%2580%25EA%25B0%2595%25EC%2597%25B4_%25EC%259D%25B4%25EA%25B0%2580%25ED%259D%2594_%25ED%2595%2599%25ED%258F%25AD_(9).jpg?type=w800")
-            $('#cleaningImg').attr("src", "https://mblogthumb-phinf.pstatic.net/MjAyMDAzMThfMjAg/MDAxNTg0NTM5MTM3Nzg0.-n1nh0qvBE-9WK8y_Yp0hBHufqZUHJllMENS2YI4HMAg.GLhV8qcfd8UcTXZ6Bx-55FDDm3yitUSpxIaCWU6qP-Ig.JPEG.sh1890/%25ED%2595%2598%25ED%258A%25B8%25EC%258B%259C%25EA%25B7%25B8%25EB%2584%2590_%25EC%258B%259C%25EC%25A6%258C3_%25EB%25B2%2584%25EB%258B%259D%25EC%258D%25AC_%25EA%25B9%2580%25EA%25B0%2595%25EC%2597%25B4_%25EC%259D%25B4%25EA%25B0%2580%25ED%259D%2594_%25ED%2595%2599%25ED%258F%25AD_(9).jpg?type=w800")
-            $('#resultImg').attr("src", "https://mblogthumb-phinf.pstatic.net/MjAyMDAzMThfMjAg/MDAxNTg0NTM5MTM3Nzg0.-n1nh0qvBE-9WK8y_Yp0hBHufqZUHJllMENS2YI4HMAg.GLhV8qcfd8UcTXZ6Bx-55FDDm3yitUSpxIaCWU6qP-Ig.JPEG.sh1890/%25ED%2595%2598%25ED%258A%25B8%25EC%258B%259C%25EA%25B7%25B8%25EB%2584%2590_%25EC%258B%259C%25EC%25A6%258C3_%25EB%25B2%2584%25EB%258B%259D%25EC%258D%25AC_%25EA%25B9%2580%25EA%25B0%2595%25EC%2597%25B4_%25EC%259D%25B4%25EA%25B0%2580%25ED%259D%2594_%25ED%2595%2599%25ED%258F%25AD_(9).jpg?type=w800")
+
+            var formData = new FormData();
+            formData.append('file', $('#ex_file')[0].files[0]);
+            var imageUrl = '';
+
+            $.ajax({
+                type: 'POST',
+                enctype: 'multipart/form-data',
+                url: 'http://127.0.0.1:3000/feed/file/',
+                data: formData,
+                contentType: false,
+                processData: false,
+                error: function (error) {
+                    console.log(error);
+                },
+                success: function (data) {
+                    console.log("TEST");
+                    imageUrl = data.croppedUrl
+                    console.log(imageUrl);
+                    console.log(String(imageUrl));
+                    $('#croppedImg').attr("src", imageUrl);
+                    $("#cleaningImg").attr("src", imageUrl);
+                },
+            })
+            //$('#croppedImg').attr("src", "https://mblogthumb-phinf.pstatic.net/MjAyMDAzMThfMjAg/MDAxNTg0NTM5MTM3Nzg0.-n1nh0qvBE-9WK8y_Yp0hBHufqZUHJllMENS2YI4HMAg.GLhV8qcfd8UcTXZ6Bx-55FDDm3yitUSpxIaCWU6qP-Ig.JPEG.sh1890/%25ED%2595%2598%25ED%258A%25B8%25EC%258B%259C%25EA%25B7%25B8%25EB%2584%2590_%25EC%258B%259C%25EC%25A6%258C3_%25EB%25B2%2584%25EB%258B%259D%25EC%258D%25AC_%25EA%25B9%2580%25EA%25B0%2595%25EC%2597%25B4_%25EC%259D%25B4%25EA%25B0%2580%25ED%259D%2594_%25ED%2595%2599%25ED%258F%25AD_(9).jpg?type=w800")
+            //$('#cleaningImg').attr("src", "https://mblogthumb-phinf.pstatic.net/MjAyMDAzMThfMjAg/MDAxNTg0NTM5MTM3Nzg0.-n1nh0qvBE-9WK8y_Yp0hBHufqZUHJllMENS2YI4HMAg.GLhV8qcfd8UcTXZ6Bx-55FDDm3yitUSpxIaCWU6qP-Ig.JPEG.sh1890/%25ED%2595%2598%25ED%258A%25B8%25EC%258B%259C%25EA%25B7%25B8%25EB%2584%2590_%25EC%258B%259C%25EC%25A6%258C3_%25EB%25B2%2584%25EB%258B%259D%25EC%258D%25AC_%25EA%25B9%2580%25EA%25B0%2595%25EC%2597%25B4_%25EC%259D%25B4%25EA%25B0%2580%25ED%259D%2594_%25ED%2595%2599%25ED%258F%25AD_(9).jpg?type=w800")
+            //$('#resultImg').attr("src", "https://mblogthumb-phinf.pstatic.net/MjAyMDAzMThfMjAg/MDAxNTg0NTM5MTM3Nzg0.-n1nh0qvBE-9WK8y_Yp0hBHufqZUHJllMENS2YI4HMAg.GLhV8qcfd8UcTXZ6Bx-55FDDm3yitUSpxIaCWU6qP-Ig.JPEG.sh1890/%25ED%2595%2598%25ED%258A%25B8%25EC%258B%259C%25EA%25B7%25B8%25EB%2584%2590_%25EC%258B%259C%25EC%25A6%258C3_%25EB%25B2%2584%25EB%258B%259D%25EC%258D%25AC_%25EA%25B9%2580%25EA%25B0%2595%25EC%2597%25B4_%25EC%259D%25B4%25EA%25B0%2580%25ED%259D%2594_%25ED%2595%2599%25ED%258F%25AD_(9).jpg?type=w800")
 
         })
 
