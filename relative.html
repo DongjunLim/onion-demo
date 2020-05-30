@@ -6,11 +6,15 @@
 
 <head>
     <link rel="stylesheet" type="text/css" href="semantic/semantic.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+    <link rel='stylesheet prefetch'
+        href='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/components/icon.min.css'>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous">
 
         </script>
     <script src="semantic/semantic.js"></script>
+
     <style>
         .filebox {
             display: inline-block;
@@ -58,8 +62,11 @@
         }
 
         .feed {
-            display: inline;
-            margin-left: 15px;
+            margin-left: 45px;
+            border-width: 1px;
+            border-color: black;
+
+
         }
     </style>
     <script>
@@ -112,9 +119,42 @@
             </button>
             <div style='margin-top:20px'> </div>
             <div style='margin-left:30px'>
-                <h2>
-                    연관 사진 추천
-                </h2>
+                <div style="display: flex;">
+                    <h2 style="margin-right: 1150px;">
+                        연관 사진 추천
+                    </h2>
+                    <div class="ui floating labeled icon dropdown button">
+                        <i class="filter icon"></i>
+                        <span class="text">카테고리 필터</span>
+                        <div class="menu">
+                            <div id="top" class="item">
+                                상의
+                            </div>
+                            <div id="bottom" class="item">
+                                하의
+                            </div>
+                            <div id="all" class="item">
+                                전체
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui floating labeled icon dropdown button">
+                        <i class="filter icon"></i>
+                        <span class="text">색상필터</span>
+                        <div class="menu">
+                            <div class="item" style="text-align: center;">
+                                연관도 하
+                            </div>
+                            <div class="item" style="text-align: center;">
+                                연관도 중
+                            </div>
+                            <div class="item" style="text-align: center;">
+                                연관도 상
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <form id="uploadForm">
 
                     <div class="filebox">
@@ -132,9 +172,25 @@
                             연관피드 확인하기
                         </button>
                     </div>
-                    <div class="filterResult">
-                        <h3 id="originalImgLabel" style="display:none;"> 필터링한 연관사진 </h3>
-                        <div style="overflow: auto; width:600px; height:1200px">
+                    <div class="filterResult" style="margin-left:30px;">
+                        <h2 id="originalImgLabel" style="text-align: center; margin-bottom: 30px;"> 필터링한 연관사진 </h2>
+                        <div style="text-align: end; font-size:20px; margin-bottom:15px">
+                            <div style="margin-bottom:20px;">
+                                <div style="display: inline;">색상:  </div>
+                                <a style="display: inline;" class="ui blue label">Blue</a>
+                                
+                            </div>
+                            <div style="display: inline;">
+                                카테고리: 
+                            </div>
+                            <a style="display: inline;" class="ui basic label">상의</a>
+                            <a style="display:inline;" class="ui basic label">하의</a>
+                            
+
+
+                        </div>
+                        <div
+                            style="overflow: auto; width:600px; height:700px;flex-wrap: wrap ; display: flex; justify-content: center;">
                             <!-- 여기다 연관 사진 리스트 이미지 태그 동적 생성해야함-->
                             <div class="feed">
                                 <img id="croppedImg"
@@ -142,22 +198,106 @@
                                 <p>분류</p>
                                 <p>상의: </p>
                                 <p>하의: </p>
-                                <p>asd </p>
+                                <p>색상: </p>
                             </div>
-
+                            <div class="feed">
+                                <img id="croppedImg"
+                                    src="https://i.pinimg.com/originals/d2/3f/fb/d23ffbb054cd9358911fb171d6fcf636.jpg">
+                                <p>분류</p>
+                                <p>상의: </p>
+                                <p>하의: </p>
+                                <p>색상: </p>
+                            </div>
+                            <div class="feed">
+                                <img id="croppedImg"
+                                    src="https://i.pinimg.com/originals/d2/3f/fb/d23ffbb054cd9358911fb171d6fcf636.jpg">
+                                <p>분류</p>
+                                <p>상의: </p>
+                                <p>하의: </p>
+                                <p>색상: </p>
+                            </div>
+                            <div class="feed">
+                                <img id="croppedImg"
+                                    src="https://i.pinimg.com/originals/d2/3f/fb/d23ffbb054cd9358911fb171d6fcf636.jpg">
+                                <p>분류</p>
+                                <p>상의: </p>
+                                <p>하의: </p>
+                                <p>색상: </p>
+                            </div>
+                            <div class="feed">
+                                <img id="croppedImg"
+                                    src="https://i.pinimg.com/originals/d2/3f/fb/d23ffbb054cd9358911fb171d6fcf636.jpg">
+                                <p>분류</p>
+                                <p>상의: </p>
+                                <p>하의: </p>
+                                <p>색상: </p>
+                            </div>
+                            <div class="feed">
+                                <img id="croppedImg"
+                                    src="https://i.pinimg.com/originals/d2/3f/fb/d23ffbb054cd9358911fb171d6fcf636.jpg">
+                                <p>분류</p>
+                                <p>상의: </p>
+                                <p>하의: </p>
+                                <p>색상: </p>
+                            </div>
                         </div>
 
                     </div>
-                    <div class="noFilter">
-
-                        <h3 id="originalImgLabel" style="display:none;"> 전체 연관 사진 </h3>
-                        <div style="overflow: auto; width:600px; height:1200px">
-                            <!-- 여기다 전체 연관 사진 리스트 이미지 태그 동적 생성해야함-->
-
-                            <div class="img_crop">
-                                <img id="croppedImg">
+                    <div class="filterResult" style="margin-left:30px;">
+                        <h2 id="originalImgLabel" style="text-align: center; margin-bottom: 30px;"> 전체 연관사진 </h2>
+                        <div
+                            style="overflow: auto; width:600px; height:700px;flex-wrap: wrap ; display: flex; justify-content: center;">
+                            <!-- 여기다 연관 사진 리스트 이미지 태그 동적 생성해야함-->
+                            <div class="feed">
+                                <img id="croppedImg"
+                                    src="https://i.pinimg.com/originals/d2/3f/fb/d23ffbb054cd9358911fb171d6fcf636.jpg">
+                                <p>분류</p>
+                                <p>상의: </p>
+                                <p>하의: </p>
+                                <p>색상: </p>
+                            </div>
+                            <div class="feed">
+                                <img id="croppedImg"
+                                    src="https://i.pinimg.com/originals/d2/3f/fb/d23ffbb054cd9358911fb171d6fcf636.jpg">
+                                <p>분류</p>
+                                <p>상의: </p>
+                                <p>하의: </p>
+                                <p>색상: </p>
+                            </div>
+                            <div class="feed">
+                                <img id="croppedImg"
+                                    src="https://i.pinimg.com/originals/d2/3f/fb/d23ffbb054cd9358911fb171d6fcf636.jpg">
+                                <p>분류</p>
+                                <p>상의: </p>
+                                <p>하의: </p>
+                                <p>색상: </p>
+                            </div>
+                            <div class="feed">
+                                <img id="croppedImg"
+                                    src="https://i.pinimg.com/originals/d2/3f/fb/d23ffbb054cd9358911fb171d6fcf636.jpg">
+                                <p>분류</p>
+                                <p>상의: </p>
+                                <p>하의: </p>
+                                <p>색상: </p>
+                            </div>
+                            <div class="feed">
+                                <img id="croppedImg"
+                                    src="https://i.pinimg.com/originals/d2/3f/fb/d23ffbb054cd9358911fb171d6fcf636.jpg">
+                                <p>분류</p>
+                                <p>상의: </p>
+                                <p>하의: </p>
+                                <p>색상: </p>
+                            </div>
+                            <div class="feed">
+                                <img id="croppedImg"
+                                    src="https://i.pinimg.com/originals/d2/3f/fb/d23ffbb054cd9358911fb171d6fcf636.jpg">
+                                <p>분류</p>
+                                <p>상의: </p>
+                                <p>하의: </p>
+                                <p>색상: </p>
                             </div>
                         </div>
+
                     </div>
 
                 </div>
@@ -167,6 +307,7 @@
 
 
     <script>
+        $('.ui.dropdown').dropdown();
         var totalFeedList = [];
         var filteredFeedList = [];
         $('#sideBarBtn').click(function () {
@@ -182,7 +323,7 @@
             location.href = 'personal.html';
         });
         $('#startButton').click(function () {
-            
+
             // 서버에 사진을 보낸 다음 돌아오는 데이터로 핸들링해야함
             // var form = $('#uploadForm')[0];
             // var formData = new FormData(form);
