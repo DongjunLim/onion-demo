@@ -8,9 +8,15 @@
     <link rel="stylesheet" type="text/css" href="semantic/semantic.css">
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous">
-
         </script>
     <script src="semantic/semantic.js"></script>
+    <style>
+        .userFrame {
+            width: 400px;
+        }
+
+        .activityList {}
+    </style>
 </head>
 
 <body>
@@ -25,21 +31,77 @@
             3. 개인화 서비스
         </a>
     </div>
-    <div class="pusher" >
+    <div class="pusher">
         <div style='margin-left:20px; margin-top: 10px;'>
-        <button id=sideBarBtn class="ui button">
-            MENU
-        </button>
-        <div style='margin-top:20px'> </div>
-        <div style='margin-left:30px'>
-            <h2>
-                개인화 서비스
-            </h2>
+            <button id=sideBarBtn class="ui button">
+                MENU
+            </button>
+            <div style='margin-top:20px'> </div>
+            <div style='margin-left:30px; margin-bottom:20px;'>
+                <h2>
+                    개인화 서비스
+                </h2>
+            </div>
+            <div style="display: flex;">
+                <div class="userFrame">
+                    <h2>사용자(본인)</h2>
+                    <div class="activityList">
+                        <div class="feed">
+                            <div class="feedId"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="userFrame">
+                    <h2>사용자B</h2>
+                    <div class="activityList">
+                        <div class="feed">
+                            <div class="feedId"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="userFrame">
+                    <h2>사용자C</h2>
+                    <div class="activityList">
+                        <div class="feed">
+                            <div class="feedId"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="userFrame">
+                    <h2>사용자D</h2>
+                    <div class="activityList">
+                        <div class="feed">
+                            <div class="feedId"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="userFrame">
+                    <h2>사용자E</h2>
+                    <div class="activityList">
+                        <div class="feed">
+                            <div class="feedId"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
-    </div>
     </div>
 
     <script>
+        $.ajax({
+            url: "",
+            data: {},
+            method: "GET",
+            dataType: "json"
+        })
+            .done(function (json) {
+                // 수신데이터 핸들링
+            })
+            .fail(function (xhr, status, errorThrown) {
+                // 통신 에러 핸들링
+            });
+
         $('#sideBarBtn').click(function () {
             $('.ui.sidebar').sidebar('toggle');
 
@@ -53,6 +115,11 @@
         $('#thirdPage').click(function () {
             location.href = 'personal.html';
         });
+
+
+
+
+
     </script>
 
 </body>
