@@ -68,6 +68,9 @@
 
 
         }
+        .feedImg {
+            max-height: 320px;
+        }
     </style>
     <script>
         var sel_file;
@@ -113,31 +116,21 @@
         </a>
     </div>
     <div class="pusher">
+
         <div style='margin-left:20px; margin-top: 10px;'>
             <button id=sideBarBtn class="ui button">
                 MENU
             </button>
+            <div id="loadingView" class="ui active inverted dimmer" style="display: none;">
+                <div class="ui medium text loader">Loading</div>
+            </div>
+
             <div style='margin-top:20px'> </div>
             <div style='margin-left:30px'>
                 <div style="display: flex;">
                     <h2 style="margin-right: 1150px;">
                         연관 사진 추천
                     </h2>
-                    <div class="ui floating labeled icon dropdown button">
-                        <i class="filter icon"></i>
-                        <span class="text">카테고리 필터</span>
-                        <div class="menu">
-                            <div id="top" class="item">
-                                상의
-                            </div>
-                            <div id="bottom" class="item">
-                                하의
-                            </div>
-                            <div id="all" class="item">
-                                전체
-                            </div>
-                        </div>
-                    </div>
                     <div class="ui floating labeled icon dropdown button">
                         <i class="filter icon"></i>
                         <span class="text">색상필터</span>
@@ -172,6 +165,7 @@
                             연관피드 확인하기
                         </button>
                     </div>
+
                     <div class="filterResult" style="margin-left:30px;">
                         <h2 id="originalImgLabel" style="text-align: center; margin-bottom: 30px;"> 필터링한 연관사진 </h2>
                         <div style="text-align: end; font-size:20px; margin-bottom:15px">
@@ -180,64 +174,15 @@
                                 <a style="display: inline;" class="ui blue label">Blue</a>
 
                             </div>
-                            <div style="display: inline;">
-                                카테고리:
-                            </div>
-                            <a style="display: inline;" class="ui basic label">상의</a>
-                            <a style="display:inline;" class="ui basic label">하의</a>
-
-
 
                         </div>
-                        <div
+                        <div id="FIL"
                             style="overflow: auto; width:600px; height:700px;flex-wrap: wrap ; display: flex; justify-content: center;">
                             <!-- 여기다 연관 사진 리스트 이미지 태그 동적 생성해야함-->
                             <div class="feed">
                                 <img id="croppedImg"
                                     src="https://i.pinimg.com/originals/d2/3f/fb/d23ffbb054cd9358911fb171d6fcf636.jpg">
                                 <p>분류</p>
-                                <p>상의: </p>
-                                <p>하의: </p>
-                                <p>색상: </p>
-                            </div>
-                            <div class="feed">
-                                <img id="croppedImg"
-                                    src="https://i.pinimg.com/originals/d2/3f/fb/d23ffbb054cd9358911fb171d6fcf636.jpg">
-                                <p>분류</p>
-                                <p>상의: </p>
-                                <p>하의: </p>
-                                <p>색상: </p>
-                            </div>
-                            <div class="feed">
-                                <img id="croppedImg"
-                                    src="https://i.pinimg.com/originals/d2/3f/fb/d23ffbb054cd9358911fb171d6fcf636.jpg">
-                                <p>분류</p>
-                                <p>상의: </p>
-                                <p>하의: </p>
-                                <p>색상: </p>
-                            </div>
-                            <div class="feed">
-                                <img id="croppedImg"
-                                    src="https://i.pinimg.com/originals/d2/3f/fb/d23ffbb054cd9358911fb171d6fcf636.jpg">
-                                <p>분류</p>
-                                <p>상의: </p>
-                                <p>하의: </p>
-                                <p>색상: </p>
-                            </div>
-                            <div class="feed">
-                                <img id="croppedImg"
-                                    src="https://i.pinimg.com/originals/d2/3f/fb/d23ffbb054cd9358911fb171d6fcf636.jpg">
-                                <p>분류</p>
-                                <p>상의: </p>
-                                <p>하의: </p>
-                                <p>색상: </p>
-                            </div>
-                            <div class="feed">
-                                <img id="croppedImg"
-                                    src="https://i.pinimg.com/originals/d2/3f/fb/d23ffbb054cd9358911fb171d6fcf636.jpg">
-                                <p>분류</p>
-                                <p>상의: </p>
-                                <p>하의: </p>
                                 <p>색상: </p>
                             </div>
                         </div>
@@ -245,57 +190,9 @@
                     </div>
                     <div class="filterResult" style="margin-left:30px;">
                         <h2 id="originalImgLabel" style="text-align: center; margin-bottom: 30px;"> 전체 연관사진 </h2>
-                        <div
+                        <div id="ALL"
                             style="overflow: auto; width:600px; height:700px;flex-wrap: wrap ; display: flex; justify-content: center;">
                             <!-- 여기다 연관 사진 리스트 이미지 태그 동적 생성해야함-->
-                            <div class="feed">
-                                <img id="croppedImg"
-                                    src="https://i.pinimg.com/originals/d2/3f/fb/d23ffbb054cd9358911fb171d6fcf636.jpg">
-                                <p>분류</p>
-                                <p>상의: </p>
-                                <p>하의: </p>
-                                <p>색상: </p>
-                            </div>
-                            <div class="feed">
-                                <img id="croppedImg"
-                                    src="https://i.pinimg.com/originals/d2/3f/fb/d23ffbb054cd9358911fb171d6fcf636.jpg">
-                                <p>분류</p>
-                                <p>상의: </p>
-                                <p>하의: </p>
-                                <p>색상: </p>
-                            </div>
-                            <div class="feed">
-                                <img id="croppedImg"
-                                    src="https://i.pinimg.com/originals/d2/3f/fb/d23ffbb054cd9358911fb171d6fcf636.jpg">
-                                <p>분류</p>
-                                <p>상의: </p>
-                                <p>하의: </p>
-                                <p>색상: </p>
-                            </div>
-                            <div class="feed">
-                                <img id="croppedImg"
-                                    src="https://i.pinimg.com/originals/d2/3f/fb/d23ffbb054cd9358911fb171d6fcf636.jpg">
-                                <p>분류</p>
-                                <p>상의: </p>
-                                <p>하의: </p>
-                                <p>색상: </p>
-                            </div>
-                            <div class="feed">
-                                <img id="croppedImg"
-                                    src="https://i.pinimg.com/originals/d2/3f/fb/d23ffbb054cd9358911fb171d6fcf636.jpg">
-                                <p>분류</p>
-                                <p>상의: </p>
-                                <p>하의: </p>
-                                <p>색상: </p>
-                            </div>
-                            <div class="feed">
-                                <img id="croppedImg"
-                                    src="https://i.pinimg.com/originals/d2/3f/fb/d23ffbb054cd9358911fb171d6fcf636.jpg">
-                                <p>분류</p>
-                                <p>상의: </p>
-                                <p>하의: </p>
-                                <p>색상: </p>
-                            </div>
                         </div>
 
                     </div>
@@ -307,26 +204,39 @@
 
 
     <script>
-        var userA = [],userB = [],userC = [],userD = [],userE = []
+        var blueLabel = "ui blue label";
+        var redLabel = "ui red label";
+        var greenLabel = "ui green label";
+        var yellowLabel = "ui yellow label";
+        var orangeLabel = "ui orange label";
+        var purpleLabel = "ui purple label";
+        var whiteLabel = "ui white label";
+        var blackLabel = "ui black label";
+        var greyLabel = "ui grey label";
+        var brownLabel = "ui brown label";
 
-        function setSimilarity(A,B){
+
+
+
+
+        function setSimilarity(A, B) {
             var cnt = 0;
             var sz = A.length;
             var similarity = 0;
-            B.forEach(function(element){
+            B.forEach(function (element) {
                 var feed = {
-                    feedId:element,
+                    feedId: element,
                     isIncluding: false,
                     isChoice: false
                 }
-                if(A.includes(element)){
+                if (A.includes(element)) {
                     cnt = cnt + 1;
                     feed.isIncluding = true;
                 }
                 userB.push(feed);   //이부분 C,D,E 도 삽입하게 수정해야됨
-                
+
             });
-            similarity = cnt/similarity * 100
+            similarity = cnt / similarity * 100
             return similarity;
         }
 
@@ -346,27 +256,72 @@
             location.href = 'personal.html';
         });
         $('#startButton').click(function () {
+            $('#loadingView').show();
+            var formData = new FormData();
+            formData.append('file', $('#ex_file')[0].files[0]);
             $.ajax({
-                url: "",
-                data: {},
-                method: "GET",
-                dataType: "json"
-            })
-                .done(function (json) {
-                    // 수신데이터 핸들링
-                    obj = {
-                        a: {
-                            activityList: ["wewhiqfwheiuf23","32423r3jrf","32fudiehui322" ]
-                        },
-                        b: {
-                            activityList: [ ]
+                type: 'POST',
+                enctype: 'multipart/form-data',
+                url: 'http://ec2-13-125-209-62.ap-northeast-2.compute.amazonaws.com:3000/feed/relatedFeed/',
+                data: formData,
+                contentType: false,
+                processData: false,
+                error: function (error) {
+                    console.log(error);
+                },
+                success: function (data) {
+                    console.log(data);
+                    totalFeedList = data.queryResult;
+                    totalFeedList.forEach(element=> {
+                        var objColor = ''
+                        switch(element.feed_color_list[0]){
+                            case "red":
+                                objColor = redLabel;
+                                break;
+                            case 'orange':
+                                objColor = orangeLabel;
+                                break;
+                            case 'yellow':
+                                objColor = yellowLabel;
+                                break;
+                            case 'green':
+                                objColor = greenLabel;
+                                break;
+                            case 'blue':
+                                objColor = blueLabel;
+                                break;
+                            case 'violet':
+                                objColor = purpleLabel;
+                                break;
+                            case 'white':
+                                objColor = whiteLabel;
+                                break;
+                            case 'black':
+                                objColor = blackLabel;
+                                break;
+                            case 'grey':
+                                objColor = greyLabel;
+                                break;
+                            case 'brown':
+                                objColor = brownLabel;
+                                break;
+                            case 'beige':
+                                objColor = whiteLabel;
+                                break;
                         }
-                    }
-                })
-                .fail(function (xhr, status, errorThrown) {
-                    // 통신 에러 핸들링
-                });
-        })›
+                        console.log(objColor);
+                        var photoUrl = 'https://onionphotostorage.s3.ap-northeast-2.amazonaws.com/' + element.feed_photo_url
+                        var temp = `<div class="feed" style="font-size:18px;">
+                            <p>분류: ${element.feed_category_list[0]}</p><p>색상: <a style="display: inline;" class="${objColor}"">${element.feed_color_list[0]}</a></p>
+                            <div style="height:350px; width:229px;"><img class="feedImg" src=${photoUrl}></div></div>`
+                        $('#ALL').append(temp);
+                    });
+                    $('#loadingView').hide();
+                },
+            });
+            
+
+        });
     </script>›
 </body>
 

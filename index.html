@@ -3,6 +3,9 @@
 
 <head>
     <link rel="stylesheet" type="text/css" href="semantic/semantic.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+    <link rel='stylesheet prefetch'
+        href='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/components/icon.min.css'>
     <style>
         .filebox {
             display: inline-block;
@@ -14,16 +17,30 @@
             text-align: end;
             font-size: 16px;
         }
+
         .colorAcc {
             padding: 8px;
-            text-align:  end;
+            text-align: end;
             font-size: 16px;
         }
-        .clr {
-            width:50px;
+
+        .feedBox {
+            overflow: auto;
+            width: 600px;
+            height: 700px;
+            flex-wrap: wrap;
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            border-width: 1px;
+            border-color: black;
         }
 
-        .categoryName{
+        .clr {
+            width: 50px;
+        }
+
+        .categoryName {
             padding: 8px;
         }
 
@@ -63,6 +80,14 @@
             max-width: 300px;
         }
 
+        .feed {
+            max-width: 220px;
+            margin-left: 45px;
+        }
+
+        .feedImg {
+            max-width: 220px;
+        }
 
 
         .img_wrap img {
@@ -179,112 +204,251 @@
                                     </th>
                                 </tr>
                                 <tr>
-                                    <td class = 'clr' style="background-color: red;"></td>
-                                    <td id="redAcc" class="colorAcc">12%</td>
+                                    <td class='clr' style="background-color: red;"></td>
+                                    <td id="redAcc" class="colorAcc"></td>
                                 </tr>
                                 <tr>
-                                    <td class = 'clr' style="background-color: orange;"></td>
-                                    <td id="orangeAcc" class="colorAcc">12%</td>
+                                    <td class='clr' style="background-color: orange;"></td>
+                                    <td id="orangeAcc" class="colorAcc"></td>
                                 </tr>
                                 <tr>
-                                    <td class = 'clr' style="background-color: yellow;"></td>
-                                    <td id="yellowAcc" class="colorAcc">12%</td>
+                                    <td class='clr' style="background-color: yellow;"></td>
+                                    <td id="yellowAcc" class="colorAcc"></td>
 
                                 </tr>
                                 <tr>
-                                    <td class = 'clr' style="background-color: green;"></td>
-                                    <td id="greenAcc" class="colorAcc">12%</td>
+                                    <td class='clr' style="background-color: green;"></td>
+                                    <td id="greenAcc" class="colorAcc"></td>
 
                                 </tr>
                                 <tr>
-                                    <td class = 'clr' style="background-color: blue;"></td>
-                                    <td id="blueAcc" class="colorAcc">12%</td>
+                                    <td class='clr' style="background-color: blue;"></td>
+                                    <td id="blueAcc" class="colorAcc"></td>
 
                                 </tr>
                                 <tr>
-                                    <td class = 'clr' style="background-color: navy;"></td>
-                                    <td id="navyAcc" class="colorAcc">12%</td>
-
+                                    <td class='clr' style="background-color: purple;"></td>
+                                    <td id="purpleAcc" class="colorAcc"></td>
                                 </tr>
                                 <tr>
-                                    <td class = 'clr' style="background-color: purple;"></td>
-                                    <td id="purpleAcc" class="colorAcc">12%</td>
+                                    <td class='clr' style="background-color: beige;"></td>
+                                    <td id="beigeAcc" class="colorAcc"></td>
+                                </tr>
+                                <tr>
+                                    <td class='clr' style="background-color: saddlebrown;"></td>
+                                    <td id="brownAcc" class="colorAcc"></td>
+                                </tr>
+                                <tr>
+                                    <td class='clr' style="background-color: whitesmoke;"></td>
+                                    <td id="whiteAcc" class="colorAcc"></td>
+                                </tr>
+                                <tr>
+                                    <td class='clr' style="background-color: grey;"></td>
+                                    <td id="greyAcc" class="colorAcc"></td>
+                                </tr>
+                                <tr>
+                                    <td class='clr' style="background-color: black;"></td>
+                                    <td id="blackAcc" class="colorAcc"></td>
                                 </tr>
                             </table>
                             <div style="width:50px;"> </div>
-                            <table border='1' style="font-size: 24px;">
+                            <table border='1' style="font-size: 20px;">
                                 <tr>
-                                    <th style = "padding: 8px; background-color: lightgrey;">카테고리</th>
-                                    <th style = "padding: 8px; background-color: lightgrey;">유사도</th>
+                                    <th style="padding: 8px; background-color: lightgrey;">카테고리</th>
+                                    <th style="padding: 8px; background-color: lightgrey;">유사도</th>
                                 </tr>
                                 <tr>
                                     <td class="categoryName">캐주얼자켓</td>
-                                    <td id="casualJacketAcc" class="accuracy">12%</td>
+                                    <td id="casualJacketAcc" class="accuracy"></td>
                                 </tr>
                                 <tr>
                                     <td class="categoryName">데님자켓</td>
-                                    <td id="denimJacketAcc" class="accuracy">12%</td>
+                                    <td id="denimJacketAcc" class="accuracy"></td>
                                 </tr>
                                 <tr>
                                     <td class="categoryName">반팔티</td>
-                                    <td id="shortSleeveAcc" class="accuracy">12%</td>
+                                    <td id="shortSleeveAcc" class="accuracy"></td>
 
                                 </tr>
                                 <tr>
                                     <td class="categoryName">긴팔티</td>
-                                    <td id="longSleeveAcc" class="accuracy">12%</td>
+                                    <td id="longSleeveAcc" class="accuracy"></td>
 
                                 </tr>
                                 <tr>
                                     <td class="categoryName">맨투맨</td>
-                                    <td id="sweatshirtAcc" class="accuracy">12%</td>
+                                    <td id="sweatShirtAcc" class="accuracy"></td>
 
                                 </tr>
                                 <tr>
                                     <td class="categoryName">니트</td>
-                                    <td id="knitAcc" class="accuracy">12%</td>
+                                    <td id="knitAcc" class="accuracy"></td>
 
                                 </tr>
                                 <tr>
                                     <td class="categoryName">코트</td>
-                                    <td id="coatAcc" class="accuracy">12%</td>
+                                    <td id="coatAcc" class="accuracy"></td>
 
                                 </tr>
                                 <tr>
                                     <td class="categoryName">패딩</td>
-                                    <td id="paddingAcc" class="accuracy">12%</td>
+                                    <td id="paddingAcc" class="accuracy"></td>
 
                                 </tr>
                                 <tr>
                                     <td class="categoryName">라이더자켓</td>
-                                    <td id="riderjacketAcc" class="accuracy">12%</td>
+                                    <td id="riderjacketAcc" class="accuracy"></td>
 
                                 </tr>
                                 <tr>
                                     <td class="categoryName">트렌치코트</td>
-                                    <td id="trenchCoatAcc" class="accuracy">12%</td>
+                                    <td id="trenchCoatAcc" class="accuracy"></td>
 
                                 </tr>
                                 <tr>
                                     <td class="categoryName">민소매티셔츠</td>
-                                    <td id="sleevelessAcc" class="accuracy">12%</td>
+                                    <td id="sleevelessAcc" class="accuracy"></td>
 
                                 </tr>
                                 <tr>
                                     <td class="categoryName">셔츠</td>
-                                    <td id="shirtAcc" class="accuracy">12%</td>
+                                    <td id="shirtAcc" class="accuracy"></td>
 
                                 </tr>
                             </table>
                         </div>
                     </div>
                 </div>
+
+                <div style="margin-top:30px;">
+                    <div style="display: flex; justify-content: center;">
+                        <div style="font-size: 30px; margin-right:30px;margin-bottom:35px;">분류기 성능</div>
+                        <div>
+                            <div class="ui floating labeled icon dropdown button">
+                                <i class="filter icon"></i>
+                                <span class="text">카테고리</span>
+                                <div class="menu">
+                                    <div id="shortSleeveButton" class="item" style="text-align: center;">
+                                        반팔티셔츠
+                                    </div>
+                                    <div id="longSleeveButton" class="item" style="text-align: center;">
+                                        긴팔티셔츠
+                                    </div>
+                                    <div id="sweatShirtButton" class="item" style="text-align: center;">
+                                        맨투맨
+                                    </div>
+                                    <div id="hoodieButton" class="item" style="text-align: center;">
+                                        후드티
+                                    </div>
+                                    <div id="shirtButton" class="item" style="text-align: center;">
+                                        셔츠
+                                    </div>
+                                    <div id="casualJacketButton" class="item" style="text-align: center;">
+                                        캐주얼자켓
+                                    </div>
+                                    <div id="riderJacketButton" class="item" style="text-align: center;">
+                                        가죽자켓
+                                    </div>
+                                    <div id="formalJacketButton" class="item" style="text-align: center;">
+                                        정장자켓
+                                    </div>
+                                    <div id="coatButton" class="item" style="text-align: center;">
+                                        일반코트
+                                    </div>
+                                    <div id="trenchCoatButton" class="item" style="text-align: center;">
+                                        트렌치코트
+                                    </div>
+                                    <div id="paddingButton" class="item" style="text-align: center;">
+                                        패딩
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="ui floating labeled icon dropdown button">
+                                <i class="filter icon"></i>
+                                <span class="text">색상분류</span>
+                                <div class="menu">
+                                    <div id="redButton" class="item" style="text-align: center;">
+                                        <div class="ui red empty circular label"></div>
+                                        빨간색
+                                    </div>
+                                    <div id="orangeButton" class="item" style="text-align: center;">
+                                        <div class="ui orange empty circular label"></div>
+                                        주황색
+                                    </div>
+                                    <div id="yellowButton" class="item" style="text-align: center;">
+                                        <div class="ui yellow empty circular label"></div>
+                                        노란색
+                                    </div>
+                                    <div id="greenButton" class="item" style="text-align: center;">
+                                        <div class="ui green empty circular label"></div>
+                                        초록색
+                                    </div>
+                                    <div id="blueButton" class="item" style="text-align: center;">
+                                        <div class="ui blue empty circular label"></div>
+                                        파란색
+                                    </div>
+                                    <div id="purpleButton" class="item" style="text-align: center;">
+                                        <div class="ui purple empty circular label"></div>
+                                        보라색
+                                    </div>
+                                    <div id="beigeButton" class="item" style="text-align: center;">
+                                        <div class="ui ivory empty circular label" style="background-color: beige;">
+                                        </div>
+                                        베이지색
+                                    </div>
+                                    <div id="brownButton" class="item" style="text-align: center;">
+                                        <div class="ui brown empty circular label"></div>
+                                        갈색
+                                    </div>
+                                    <div id="whiteButton" class="item" style="text-align: center;">
+                                        <div class="ui white empty circular label"></div>
+                                        흰색
+                                    </div>
+                                    <div id="greyButton" class="item" style="text-align: center;">
+                                        <div class="ui grey empty circular label"></div>
+                                        회색
+                                    </div>
+                                    <div id="blackButton" class="item" style="text-align: center;">
+                                        <div class="ui black empty circular label"></div>
+                                        검정색
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id = "Acc" style= "margin-left:15px; font-size: 18px;">
+                            
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: center;">
+                        <div>
+                            <div style="margin-left:200px; font-size: 20px;">
+                                분류 성공 사진
+                            </div>
+                            <div id="success" class="feedBox">
+                            </div>
+                        </div>
+                        <div>
+                            <div style="margin-left:200px; font-size: 20px;">
+                                분류 실패 사진
+                            </div>
+                            <div id="fail" class="feedBox">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
 
 
     <script>
+        var sCnt = 0;
+        var fCnt = 0;
+
         $('.ui.dropdown').dropdown();
         $('#sideBarBtn').click(function () {
             $('.ui.sidebar').sidebar('toggle');
@@ -302,17 +466,180 @@
         function sleep(t) {
             return new Promise(resolve => setTimeout(resolve, t));
         }
+        function showColorFeed(data) {
+            
+            var photoUrl = 'https://onionphotostorage.s3.ap-northeast-2.amazonaws.com/' + data.feed_photo_url;
+            var temp = `<div class="feed"><div style="margin-bottom:15px"><img class="feedImg"
+                                            src="${photoUrl}"></div></div>`;
+            if (data.IsCorrectColor == 'Y') {
+                sCnt += 1;
+                $('#success').append(temp);
+            } else {
+                fCnt += 1;
+                $('#fail').append(temp);
+            }
+        }
+
+        function showCategoryFeed(data){
+            var photoUrl = 'https://onionphotostorage.s3.ap-northeast-2.amazonaws.com/' + data.feed_photo_url;
+            var temp = `<div class="feed"><div style="margin-bottom:15px"><img class="feedImg"
+                                            src="${photoUrl}"></div></div>`;
+            if (data.IsCorrectClass == 'Y') {
+                sCnt += 1;
+                $('#success').append(temp);
+            } else {
+                fCnt += 1;
+                $('#fail').append(temp);
+
+            }
+        }
+
+        function requestFeedListByColor(colorName){
+            sCnt = 0;
+            fCnt = 0;
+            $.ajax({
+                method: 'GET',
+                data: { color: colorName },
+                url: 'http://ec2-13-124-79-70.ap-northeast-2.compute.amazonaws.com:3000/feed/color',
+                dataType: "json"
+            })
+            .done(function(json) {
+                $('#success').empty();
+                $('#fail').empty();
+                $('#Acc').empty();
+                json.forEach(element => {
+
+                    showColorFeed(element);
+                })
+                var acc = sCnt / (sCnt + fCnt) * 100;
+                var temp = `<div>성공: ${sCnt}, 실패: ${fCnt}, 정확도: ${acc.toFixed(0)}%</div>`;
+                $('#Acc').append(temp);
+            })
+            .fail(function (xhr, status, errorThrown) {
+                    // 통신 에러 핸들링
+            });
+        }
+
+        function requestFeedListByCategory(categoryName){
+            sCnt = 0;
+            fCnt = 0;
+            $.ajax({
+                method: 'GET',
+                data: { category: categoryName },
+                url: 'http://ec2-13-124-79-70.ap-northeast-2.compute.amazonaws.com:3000/feed/category',
+                dataType: "json"
+            })
+            .done(function(json) {
+                $('#success').empty();
+                $('#fail').empty();
+                $('#Acc').empty();
+                json.forEach(element => {
+                    showCategoryFeed(element);
+                })
+                var acc = sCnt / (sCnt + fCnt) * 100;
+                var temp = `<div>성공: ${sCnt}, 실패: ${fCnt}, 정확도: ${acc.toFixed(0)}%</div>`;
+                $('#Acc').append(temp);
+            })
+            .fail(function (xhr, status, errorThrown) {
+                    // 통신 에러 핸들링
+            });        
+        }
+
+
+
+        $('#redButton').click(function () {
+            requestFeedListByColor("red");
+        });
+
+        $('#orangeButton').click(function () {
+            requestFeedListByColor("orange");
+        });
+
+        $('#yellowButton').click(function () {
+            requestFeedListByColor("yellow");
+        });
+
+        $('#greenButton').click(function () {
+            requestFeedListByColor("green");
+        });
+
+        $('#blueButton').click(function () {
+            requestFeedListByColor("blue");
+        });
+
+        $('#purpleButton').click(function () {
+            requestFeedListByColor("violet");
+        });
+
+        $('#beigeButton').click(function () {
+            requestFeedListByColor("beige");
+        });
+
+        $('#whiteButton').click(function () {
+            requestFeedListByColor("white");
+        });
+
+        $('#greyButton').click(function () {
+            requestFeedListByColor("grey");
+        });
+
+        $('#brownButton').click(function () {
+            requestFeedListByColor("brown");
+        });
+
+        $('#blackButton').click(function () {
+            requestFeedListByColor("black");
+        });
+
+        $('#shortSleeveButton').click(function () {
+            requestFeedListByCategory("shortSleeve");
+        })
+        $('#longSleeveButton').click(function () {
+            requestFeedListByCategory("longSleeve");
+        })
+        $('#riderJacketButton').click(function () {
+            requestFeedListByCategory("riderJacket");
+        })
+        $('#sweatShirtButton').click(function () {
+            requestFeedListByCategory("sweatShirts");
+        })
+        $('#coatButton').click(function () {
+            requestFeedListByCategory("coat");
+        })
+        $('#formalJacketButton').click(function () {
+            requestFeedListByCategory("formalJacket");
+        })
+        $('#paddingButton').click(function () {
+            requestFeedListByCategory("padding");
+        })
+        $('#shirtButton').click(function () {
+            requestFeedListByCategory("shirts");
+        })
+        $('#trenchCoatButton').click(function () {
+            requestFeedListByCategory("trenchCoat");
+        })
+        $('#hoodieButton').click(function () {
+            requestFeedListByCategory("hoodie");
+        })
+        $('#casualJacketButton').click(function () {
+            requestFeedListByCategory("casualJacket");
+        })
+
+
+
+
         $('#startClassifier').click(function () {
             $('#cropLoading').show()
+            $('#croppedImg').attr("src", "");
+            $("#cleaningImg").attr("src", "");
 
             var formData = new FormData();
             formData.append('file', $('#ex_file')[0].files[0]);
-            var imageUrl = '';
 
             $.ajax({
                 type: 'POST',
                 enctype: 'multipart/form-data',
-                url: 'http://127.0.0.1:3000/feed/file/',
+                url: 'http://ec2-13-124-79-70.ap-northeast-2.compute.amazonaws.com:3000/feed/file/',
                 data: formData,
                 contentType: false,
                 processData: false,
@@ -320,18 +647,43 @@
                     console.log(error);
                 },
                 success: function (data) {
-                    console.log("TEST");
-                    imageUrl = data.croppedUrl
-                    console.log(imageUrl);
-                    console.log(String(imageUrl));
-                    $('#croppedImg').attr("src", imageUrl);
-                    $("#cleaningImg").attr("src", imageUrl);
+                    console.log(data);
+                    $('#cropLoading').hide();
+                    $('#croppedImg').attr("src", data.croppedUrl);
+                    $("#cleaningImg").attr("src", data.backgroundUrl);
+                    $('#redAcc').html(`${(data.dominantColor[5].prob*100).toFixed(2)}%`);
+                    $('#orangeAcc').html(`${(data.dominantColor[12].prob*100).toFixed(2)}%`);
+                    $('#yellowAcc').html(`${(data.dominantColor[11].prob*100).toFixed(2)}%`);
+                    $('#greenAcc').html(`${(data.dominantColor[6].prob*100).toFixed(2)}%`);
+                    $('#blueAcc').html(`${(data.dominantColor[4].prob*100).toFixed(2)}%`);
+                    $('#purpleAcc').html(`${(data.dominantColor[13].prob*100).toFixed(2)}%`);
+                    $('#whiteAcc').html(`${(data.dominantColor[1].prob*100).toFixed(2)}%`);
+                    $('#blackAcc').html(`${(data.dominantColor[0].prob*100).toFixed(2)}%`);
+                    $('#greyAcc').html(`${(data.dominantColor[2].prob*100).toFixed(2)}%`);
+                    $('#brownAcc').html(`${(data.dominantColor[7].prob*100).toFixed(2)}%`);
+                    $('#beigeAcc').html(`${(data.dominantColor[8].prob*100).toFixed(2)}%`);
+                    $('#casualJacketAcc').html(`${(data.fashionClass[0].percentage*100).toFixed(2)}%`);
+                    $('#coatAcc').html(`${(data.fashionClass[1].percentage*100).toFixed(2)}%`);
+                    $('#denimJacketAcc').html(`${(data.fashionClass[2].percentage*100).toFixed(2)}%`);
+                    $('#formalJacketAcc').html(`${(data.fashionClass[3].percentage*100).toFixed(2)}%`);
+                    $('#hoodieAcc').html(`${(data.fashionClass[4].percentage*100).toFixed(2)}%`);
+                    $('#knitAcc').html(`${(data.fashionClass[5].percentage*100).toFixed(2)}%`);
+                    $('#longSleeveAcc').html(`${(data.fashionClass[6].percentage*100).toFixed(2)}%`);
+                    $('#paddingAcc').html(`${(data.fashionClass[7].percentage*100).toFixed(2)}%`);
+                    $('#riderjacketAcc').html(`${(data.fashionClass[8].percentage*100).toFixed(2)}%`);
+                    $('#shirtAcc').html(`${(data.fashionClass[9].percentage*100).toFixed(2)}%`);
+                    $('#shortSleeveAcc').html(`${(data.fashionClass[10].percentage*100).toFixed(2)}%`);
+                    $('#sleevelessAcc').html(`${(data.fashionClass[11].percentage*100).toFixed(2)}%`);
+                    $('#sweatShirtAcc').html(`${(data.fashionClass[12].percentage*100).toFixed(2)}%`);
+                    $('#trenchCoatAcc').html(`${(data.fashionClass[13].percentage*100).toFixed(2)}%`);
+
+
+
+
+
+
                 },
             })
-            //$('#croppedImg').attr("src", "https://mblogthumb-phinf.pstatic.net/MjAyMDAzMThfMjAg/MDAxNTg0NTM5MTM3Nzg0.-n1nh0qvBE-9WK8y_Yp0hBHufqZUHJllMENS2YI4HMAg.GLhV8qcfd8UcTXZ6Bx-55FDDm3yitUSpxIaCWU6qP-Ig.JPEG.sh1890/%25ED%2595%2598%25ED%258A%25B8%25EC%258B%259C%25EA%25B7%25B8%25EB%2584%2590_%25EC%258B%259C%25EC%25A6%258C3_%25EB%25B2%2584%25EB%258B%259D%25EC%258D%25AC_%25EA%25B9%2580%25EA%25B0%2595%25EC%2597%25B4_%25EC%259D%25B4%25EA%25B0%2580%25ED%259D%2594_%25ED%2595%2599%25ED%258F%25AD_(9).jpg?type=w800")
-            //$('#cleaningImg').attr("src", "https://mblogthumb-phinf.pstatic.net/MjAyMDAzMThfMjAg/MDAxNTg0NTM5MTM3Nzg0.-n1nh0qvBE-9WK8y_Yp0hBHufqZUHJllMENS2YI4HMAg.GLhV8qcfd8UcTXZ6Bx-55FDDm3yitUSpxIaCWU6qP-Ig.JPEG.sh1890/%25ED%2595%2598%25ED%258A%25B8%25EC%258B%259C%25EA%25B7%25B8%25EB%2584%2590_%25EC%258B%259C%25EC%25A6%258C3_%25EB%25B2%2584%25EB%258B%259D%25EC%258D%25AC_%25EA%25B9%2580%25EA%25B0%2595%25EC%2597%25B4_%25EC%259D%25B4%25EA%25B0%2580%25ED%259D%2594_%25ED%2595%2599%25ED%258F%25AD_(9).jpg?type=w800")
-            //$('#resultImg').attr("src", "https://mblogthumb-phinf.pstatic.net/MjAyMDAzMThfMjAg/MDAxNTg0NTM5MTM3Nzg0.-n1nh0qvBE-9WK8y_Yp0hBHufqZUHJllMENS2YI4HMAg.GLhV8qcfd8UcTXZ6Bx-55FDDm3yitUSpxIaCWU6qP-Ig.JPEG.sh1890/%25ED%2595%2598%25ED%258A%25B8%25EC%258B%259C%25EA%25B7%25B8%25EB%2584%2590_%25EC%258B%259C%25EC%25A6%258C3_%25EB%25B2%2584%25EB%258B%259D%25EC%258D%25AC_%25EA%25B9%2580%25EA%25B0%2595%25EC%2597%25B4_%25EC%259D%25B4%25EA%25B0%2580%25ED%259D%2594_%25ED%2595%2599%25ED%258F%25AD_(9).jpg?type=w800")
-
         })
 
     </script>
