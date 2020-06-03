@@ -68,6 +68,7 @@
 
 
         }
+
         .feedImg {
             max-height: 320px;
         }
@@ -135,13 +136,13 @@
                         <i class="filter icon"></i>
                         <span class="text">색상필터</span>
                         <div class="menu">
-                            <div class="item" style="text-align: center;">
+                            <div id="low" class="item" style="text-align: center;">
                                 연관도 하
                             </div>
-                            <div class="item" style="text-align: center;">
+                            <div id="mid" class="item" style="text-align: center;">
                                 연관도 중
                             </div>
-                            <div class="item" style="text-align: center;">
+                            <div id="high" class="item" style="text-align: center;">
                                 연관도 상
                             </div>
                         </div>
@@ -156,7 +157,7 @@
                     </div>
                 </form>
                 <div class="frame" style="margin-top: 20px; display: flex; ">
-                    <div class="original">
+                    <div id="uploadFeedInfo" class="original">
                         <h3 id="originalImgLabel" style="display:none;"> 원본이미지 </h3>
                         <div class="img_wrap">
                             <img id="img" />
@@ -164,14 +165,14 @@
                         <button id="startButton" , class="ui button" style="display:none">
                             연관피드 확인하기
                         </button>
+                        <div id="result"></div>
                     </div>
 
                     <div class="filterResult" style="margin-left:30px;">
                         <h2 id="originalImgLabel" style="text-align: center; margin-bottom: 30px;"> 필터링한 연관사진 </h2>
                         <div style="text-align: end; font-size:20px; margin-bottom:15px">
-                            <div style="margin-bottom:20px;">
-                                <div style="display: inline;">색상: </div>
-                                <a style="display: inline;" class="ui blue label">Blue</a>
+                            <div id="colorLabel" style="margin-bottom:20px;">
+
 
                             </div>
 
@@ -179,12 +180,6 @@
                         <div id="FIL"
                             style="overflow: auto; width:600px; height:700px;flex-wrap: wrap ; display: flex; justify-content: center;">
                             <!-- 여기다 연관 사진 리스트 이미지 태그 동적 생성해야함-->
-                            <div class="feed">
-                                <img id="croppedImg"
-                                    src="https://i.pinimg.com/originals/d2/3f/fb/d23ffbb054cd9358911fb171d6fcf636.jpg">
-                                <p>분류</p>
-                                <p>색상: </p>
-                            </div>
                         </div>
 
                     </div>
@@ -214,7 +209,15 @@
         var blackLabel = "ui black label";
         var greyLabel = "ui grey label";
         var brownLabel = "ui brown label";
-
+        var feedColor = "";
+        var feedCategory = "";
+        var colorProb = -1;
+        var categoryProb = -1;
+        var feedColorRange = [];
+        var redRange = ["red", "orange", "yellow"];
+        var brownRange = ["brown", "beige"];
+        var greenRange = ["green", "blue", "purple"];
+        var whiteRange = ["white", "black", "grey"];
 
 
 
@@ -255,6 +258,78 @@
         $('#thirdPage').click(function () {
             location.href = 'personal.html';
         });
+        $('#high').click(function () {
+            $('#FIL').empty();
+            $('#ALL').empty();
+            $('#colorLabel').empty();
+            var temp = `
+                    <div style="display: inline;">색상: </div>
+                    <a style="display: inline;" class="ui ${feedColor} label">${feedColor}</a>`;
+            $('#colorLabel').append(temp);
+            totalFeedList.forEach(element => {
+                if (element.feed_color_list[0] == feedColor) {
+                    $('#FIL').append(element.tag);
+                } else {
+                    $('#ALL').append(element.tag);
+                }
+
+            })
+        })
+
+        $('#mid').click(function () {
+            $('#FIL').empty();
+            $('#ALL').empty();
+            $('#colorLabel').empty();
+            $('#colorLabel').append('<div style="display: inline;">색상: </div>');
+            feedColorRange.forEach(element => {
+                var temp = `
+                    <a style="display: inline;" class="ui ${element} label">${element}</a>`;
+                $('#colorLabel').append(temp);
+            })
+            totalFeedList.forEach(element => {
+                if (feedColorRange.includes(element.feed_color_list[0])) {
+                    $('#FIL').append(element.tag);
+
+                } else {
+                    $('#ALL').append(element.tag);
+                }
+            })
+        })
+
+        $('#low').click(function () {
+            $('#FIL').empty();
+            $('#ALL').empty();
+            $('#colorLabel').empty();
+            $('#colorLabel').append('<div style="display: inline;">색상: </div>');
+
+            redRange.forEach(element => {
+                var temp = `
+                    <a style="display: inline;" class="ui ${element} label">${element}</a>`;
+                $('#colorLabel').append(temp);
+            })
+            greenRange.forEach(element => {
+                var temp = `
+                    <a style="display: inline;" class="ui ${element} label">${element}</a>`;
+                $('#colorLabel').append(temp);
+            })
+            whiteRange.forEach(element => {
+                var temp = `
+                    <a style="display: inline;" class="ui ${element} label">${element}</a>`;
+                $('#colorLabel').append(temp);
+            })
+            brownRange.forEach(element => {
+                var temp = `
+                    <a style="display: inline;" class="ui ${element} label">${element}</a>`;
+                $('#colorLabel').append(temp);
+            })
+            totalFeedList.forEach(element => {
+                $('#FIL').append(element.tag);
+            })
+        })
+
+
+
+
         $('#startButton').click(function () {
             $('#loadingView').show();
             var formData = new FormData();
@@ -262,7 +337,7 @@
             $.ajax({
                 type: 'POST',
                 enctype: 'multipart/form-data',
-                url: 'http://ec2-13-125-209-62.ap-northeast-2.compute.amazonaws.com:3000/feed/relatedFeed/',
+                url: 'http://ec2-52-78-188-154.ap-northeast-2.compute.amazonaws.com:3000/feed/relatedFeed/',
                 data: formData,
                 contentType: false,
                 processData: false,
@@ -270,11 +345,45 @@
                     console.log(error);
                 },
                 success: function (data) {
+                    categoryProb = -1;
+                    colorProb = -1;
                     console.log(data);
                     totalFeedList = data.queryResult;
-                    totalFeedList.forEach(element=> {
+
+                    data.dominantColor.forEach(element => {
+                        if (element.prob > colorProb) {
+                            colorProb = element.prob;
+                            feedColor = element.color;
+                        }
+                    })
+                    data.fashionClass.forEach(element => {
+                        if (element.percentage > categoryProb) {
+                            categoryProb = element.percentage;
+                            feedCategory = element.category;
+                        }
+                    })
+
+                    if (feedColor == 'red' || feedColor == 'orange' || feedColor == 'yellow') {
+                        feedColorRange = redRange;
+                    } else if (feedColor == 'green' || feedColor == 'blue' || feedColor == 'violet') {
+                        feedColorRange = greenRange;
+                    } else if (feedColor == 'brown' || feedColor == 'beige') {
+                        feedColorRange = brownRange;
+                    } else {
+                        feedColorRange = whiteRange;
+                    }
+                    var tempTag = `
+                    <div style="display: inline; font-size:16px;">색상: </div>
+                    <a style="display: inline; font-size:16px;" class="ui ${feedColor} label">${feedColor}</a>`;
+                    $('#result').empty();
+                    $('#result').append(`<p style="font-size:16px; margin-top:12px; font-weight:bold;">분류 카테고리: ${feedCategory}</p>`);
+                    $('#result').append(tempTag);
+                    $('#ALL').empty();
+                    $('#FIL').empty();
+
+                    totalFeedList.forEach(element => {
                         var objColor = ''
-                        switch(element.feed_color_list[0]){
+                        switch (element.feed_color_list[0]) {
                             case "red":
                                 objColor = redLabel;
                                 break;
@@ -314,12 +423,13 @@
                         var temp = `<div class="feed" style="font-size:18px;">
                             <p>분류: ${element.feed_category_list[0]}</p><p>색상: <a style="display: inline;" class="${objColor}"">${element.feed_color_list[0]}</a></p>
                             <div style="height:350px; width:229px;"><img class="feedImg" src=${photoUrl}></div></div>`
+                        element.tag = temp;
                         $('#ALL').append(temp);
                     });
                     $('#loadingView').hide();
                 },
             });
-            
+
 
         });
     </script>›

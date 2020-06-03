@@ -500,7 +500,7 @@
             $.ajax({
                 method: 'GET',
                 data: { color: colorName },
-                url: 'http://ec2-13-124-79-70.ap-northeast-2.compute.amazonaws.com:3000/feed/color',
+                url: 'http://ec2-52-78-188-154.ap-northeast-2.compute.amazonaws.com:3000/feed/color',
                 dataType: "json"
             })
             .done(function(json) {
@@ -526,7 +526,7 @@
             $.ajax({
                 method: 'GET',
                 data: { category: categoryName },
-                url: 'http://ec2-13-124-79-70.ap-northeast-2.compute.amazonaws.com:3000/feed/category',
+                url: 'http://ec2-52-78-188-154.ap-northeast-2.compute.amazonaws.com:3000/feed/category',
                 dataType: "json"
             })
             .done(function(json) {
@@ -639,7 +639,7 @@
             $.ajax({
                 type: 'POST',
                 enctype: 'multipart/form-data',
-                url: 'http://ec2-13-124-79-70.ap-northeast-2.compute.amazonaws.com:3000/feed/file/',
+                url: 'http://ec2-52-78-188-154.ap-northeast-2.compute.amazonaws.com:3000/feed/file/',
                 data: formData,
                 contentType: false,
                 processData: false,
@@ -676,12 +676,6 @@
                     $('#sleevelessAcc').html(`${(data.fashionClass[11].percentage*100).toFixed(2)}%`);
                     $('#sweatShirtAcc').html(`${(data.fashionClass[12].percentage*100).toFixed(2)}%`);
                     $('#trenchCoatAcc').html(`${(data.fashionClass[13].percentage*100).toFixed(2)}%`);
-
-
-
-
-
-
                 },
             })
         })

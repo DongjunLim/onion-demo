@@ -9,13 +9,40 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous">
         </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+    <link rel='stylesheet prefetch'
+        href='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/components/icon.min.css'>
     <script src="semantic/semantic.js"></script>
     <style>
         .userFrame {
             width: 400px;
         }
 
-\    </style>
+        .activityList {
+            overflow: auto;
+            height: 800px;
+        }
+
+        .feed {
+            width: 400px;
+            border-width: 1px;
+            border: 1px solid black;
+        }
+
+        table {
+            width: 350px;
+            border: 1px solid black;
+        }
+
+        td {
+
+            border: 1px solid lightgray;
+        }
+
+        h2 {
+            display: inline;
+        } 
+    </style>
 </head>
 
 <body>
@@ -40,62 +67,201 @@
                 <h2>
                     개인화 서비스
                 </h2>
+                <div class="ui floating labeled icon dropdown button">
+                    <i class="filter icon"></i>
+                    <span class="text">유사도 설정</span>
+                    <div class="menu">
+                        <div id="p20" class="item" style="text-align: center;">
+                            20%
+                        </div>
+                        <div id="p40" class="item" style="text-align: center;">
+                            40%
+                        </div>
+                        <div id="p60" class="item" style="text-align: center;">
+                            60%
+                        </div>
+                        <div id="p80" class="item" style="text-align: center;">
+                            80%
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <div style="display: flex;">
                 <div class="userFrame">
                     <h2>사용자A(본인)</h2>
                     <div class="activityList">
-                        <div class="feed">
-                            <div class="feedId"></div>
-                        </div>
+                        <table id='User'>
+
+                        </table>
                     </div>
                 </div>
                 <div class="userFrame">
-                    <h2>사용자B</h2>
+                    <h2>사용자B</h2><div id="simA" style="margin-left:160px; display: inline; font-size:18px; text-align: end;"></div>
                     <div class="activityList">
-                        <div class="feed">
-                            <div class="feedId"></div>
-                        </div>
+                        <table id='A'>
+
+                        </table>
                     </div>
                 </div>
                 <div class="userFrame">
-                    <h2>사용자C</h2>
+                    <h2>사용자C</h2><div id="simB" style="margin-left:160px; display: inline; font-size:18px; text-align: end;"></div>
                     <div class="activityList">
-                        <div class="feed">
-                            <div class="feedId"></div>
-                        </div>
+                        <table id='B'>
+
+                        </table>
                     </div>
                 </div>
                 <div class="userFrame">
-                    <h2>사용자D</h2>
+                    <h2>사용자D</h2><div id="simC" style="margin-left:160px; display: inline; font-size:18px; text-align: end;"></div>
                     <div class="activityList">
-                        <div class="feed">
-                            <div class="feedId"></div>
-                        </div>
+                        <table id='C'>
+
+                        </table>
                     </div>
                 </div>
                 <div class="userFrame">
-                    <h2>사용자E</h2>
+                    <h2>사용자E</h2><div id="simD" style="margin-left:160px; display: inline; font-size:18px; "></div>
                     <div class="activityList">
-                        <div class="feed">
-                            <div class="feedId"></div>
-                        </div>
+                        <table id='D'>
+
+                        </table>
                     </div>
                 </div>
 
+            </div>
+            <div style="margin-top:30px; font-size:24px; font-weight: bold; text-align: center;">
+                추천 게시글 결과
+                <div>
+                    <table id="resultFeedList" style="width:500px; font-weight: normal; font-size:16px;">
+
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
+        Set.prototype.shuffle = function () {
+            var length = this.length;
+            while (length) {
+                var index = Math.floor((length--) * Math.random());
+                var temp = this[length];
+                this[length] = this[index];
+                this[index] = temp;
+            }
+            return this;
+        };
+        Array.prototype.shuffle = function () {
+            var length = this.length;
+            while (length) {
+                var index = Math.floor((length--) * Math.random());
+                var temp = this[length];
+                this[length] = this[index];
+                this[index] = temp;
+            }
+            return this;
+        };
+        var user = {}, userA = {}, userB = {}, userC = {}, userD = {};
+        var users = [userD, userC, userB, userA, user];
+        var candidates = [];
+        var resultFeeds = [];
+        function setSimilarity(A, B) {
+            var cnt = 0;
+            var similarity = A.user_activity_list.length - 1;
+            B.user_activity_list.shuffle();
+            A.user_activity_list.forEach(function (element) {
+                var temp = `<tr><td style="background-color:white">게시글 id: ${element}</td></tr>`
+                $(`#${A.user_nickname}`).append(temp);
+            })
+            B.user_activity_list.forEach(function (element) {
+                var colorParam = 'white';
+                if (A.user_activity_list.includes(element)) {
+                    cnt = cnt + 1;
+                    colorParam = '#d1f5d1';
+                }
+                var temp = `<tr><td style="background-color:${colorParam}">게시글 id: ${element}</td></tr>`
+                $(`#${B.user_nickname}`).append(temp);
+            });
+            similarity = cnt / similarity * 100
+            $(`#sim${B.user_nickname}`).text(`유사도: ${similarity.toFixed(1)}%`)
+            return similarity;
+        }
+
+        function ubcf(per) {
+            candidates = [];
+            resultFeeds = [];
+            for (var i = 0; i < 4; i++) {
+                if (users[i].similarity > per)
+                    users[i].user_activity_list.forEach(element => {
+                        if (!(users[4].user_activity_list.includes(element))) {
+                            candidates.push(element);
+                        }
+                    })
+            }
+            candidates.shuffle();
+            var idx = 0;
+            $('#resultFeedList').empty();
+            for (var i = 0; i < candidates.length; i++) {
+                if (i > 30) {
+                    break;
+                }
+                var temp = `<tr><td style="background-color:#d2eeff;">게시글 id: ${candidates[i]}</td></tr>`
+                $('#resultFeedList').append(temp);
+            }
+            var sliceList = candidates.slice(0, 30);
+            reDrawing(sliceList, per);
+        }
+
+        function reDrawing(sList, num) {
+            for (var i = 0; i < 4; i++) {
+                $(`#${users[i].user_nickname}`).empty();
+                if (users[i].similarity < num) {
+                    users[i].user_activity_list.forEach(element => {
+                        var colorParam = 'white';
+                        if (users[4].user_activity_list.includes(element)) {
+                            colorParam = '#d1f5d1';
+                        }
+                        var temp = `<tr><td style="background-color:${colorParam}">게시글 id: ${element}</td></tr>`;
+                        $(`#${users[i].user_nickname}`).append(temp);
+                    })
+                }
+                else {
+                    users[i].user_activity_list.forEach(element => {
+                        var colorParam = 'white';
+                        if (users[4].user_activity_list.includes(element)) {
+                            colorParam = '#d1f5d1';
+                        } else if (sList.includes(element)) {
+                            colorParam = '#d2eeff';
+                        }
+                        var temp = `<tr><td style="background-color:${colorParam}">게시글 id: ${element}</td></tr>`;
+                        $(`#${users[i].user_nickname}`).append(temp);
+                    })
+                }
+            }
+        }
+
+
+
+
+        $('.ui.dropdown').dropdown();
+
+        myActivityList = [];
         $.ajax({
-            url: "",
+            url: "http://ec2-52-78-188-154.ap-northeast-2.compute.amazonaws.com:3000/user/ual",
             data: {},
             method: "GET",
             dataType: "json"
         })
             .done(function (json) {
-                // 수신데이터 핸들링
+                console.log(json);
+                for (var i = 0; i < 5; i++) {
+                    users[i] = json[i];
+                }
+                for (var i = 0; i < 4; i++) {
+                    users[i].similarity = setSimilarity(users[4], users[i]);
+                    console.log(users[i].similarity);
+                }
             })
             .fail(function (xhr, status, errorThrown) {
                 // 통신 에러 핸들링
@@ -113,6 +279,19 @@
         $('#thirdPage').click(function () {
             location.href = 'personal.html';
         });
+
+        $('#p20').click(function () {
+            ubcf(20);
+        })
+        $('#p40').click(function () {
+            ubcf(40);
+        })
+        $('#p60').click(function () {
+            ubcf(60);
+        })
+        $('#p80').click(function () {
+            ubcf(80);
+        })
 
 
 
